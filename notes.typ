@@ -45,6 +45,31 @@ Type systems are typically used to _statically_ prove information about a progra
 
 The conservativity of a type system can generally be reduced by allowing more specific types, typically with a more general type system, so that certain structures and relationships can be represented more accurately. Likewise, a type system can only detect certain classes of errors; thes classes can only be expanded by allowing more generality in the type system. #footnote[Generality is not always the best term to describe this behaviour. For example, supporting the access of private data emitting an error requires arguably a more specific type system, to handle an invented feature.] As type systems grow to support more extended static checking methods, they approach being a proof checker.
 
+== What Type Systems Are Good For
+
+*Detecting errors*: A proof system running automatically on your code allows for many errors to be detected automatically, hastening correctness.
+// Rich type checking can sometimes even catch the majority of issues that occur, resulting in a surprising level of correctness. Type checkers also help detect changing definitions, as type-level inconsistencies caused by a far-away change can be automatically enumerated.
+
+*Abstraction*: Type systems can represent contracts that must be upheld, allowing more modularity by virtue of relying on contracts (types), not definitions.
+
+*Documentation*: Types also act as a form of documentation in that they desribe an abstracted form of your code; importantly, your code and its types cannot become desynchronized.
+
+*Safety*: Although safety is hard to define, a language is often considered 'safe' if it protects its own abstractions well with some sort of static or dynamic type safety. Several definitions of safety:
+- Protecting its own abstractions (if the program is unsafe, it may violate its abstractions)
+- Preventing untrapped errors at runtime (if the program is unsafe, errors may propagate)
+- Completely defined by the manual (i.e. no undefined behaviour)
+// pointer provenance, stack thread-exclusivity
+
+*Efficiency*: Type checkers provide more compile-time guarantees, allowing for more optimizations, such as which instructions are used or which runtime checks can be omitted. #footnote[I do take issue with this statement. The point at which one has the most information about program functionality and tendencies is at runtime; thus, there is a higher performance ceiling when concerned with runtime checks (see #link("https://en.wikipedia.org/wiki/Itanium")[Itanium] as a prominent pro-runtime/pro-JIT example). Furthermore, a sufficiently intelligent compiler can hypothetically determine all information that a type-checker would be able to---it is simply much more difficult to write a compiler as such. In a way, efficiency _does_ apply here---just as compiler development efficiency instead of program runtime efficiency. I digress.]
+
+Other uses:
+
+*Security*: Unsafe languages can be leveraged in ways that harm security (see #link("https://www.microsoft.com/en-us/msrc/blog/2019/07/we-need-a-safer-systems-programming-language")[Microsoft on memory safety]). Type systems that prevent this can help increase the security of programs.
+
+// Hear me out: theorem prover type system that tries to make proofs about your code as optimization. For example, the compiler's built-in theorem prover would try to prove "this address will always be in-bounds" given the logical statements that your program corresponds to. Sounds cool but also insane.
+
+*Data storage*: Types are on a rise in database or data storage systems, with JSON schemas and `.xsd` files as just two examples. They help structure data, and have all the same benefits types do normally.
+
 #pagebreak()
 
 #set heading(numbering: none)
