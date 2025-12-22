@@ -37,3 +37,5 @@
 
 References from _Types and Programming Languages_ that seem interesting on an initial look.
 
+- _Essentials of Programming Languages_ by Friedman, Wand, and Haynes (2001)
+- _Programming Language Pragmatics_ by Scott (1999)
