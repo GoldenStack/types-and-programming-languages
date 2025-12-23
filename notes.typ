@@ -99,6 +99,19 @@ The original textbook has an extended timeline. A few select choices #footnote("
 
 The textbook was produced in 2002 and thus has nothing past the 1990s.
 
+== Related reading
+
+- _Foundations for Programming Languages_ by Mitchell (1996)
+- _Theories of Programming Languages_ by Reynolds (1998)
+- _The Structure of Typed Programming Languages_ by Schimdt (1994)
+- _Basic Simple Type Theory_ by Hindley (1997)
+- _Basic Category Theory for Computer Scientists_ by Pierce (1991)
+ - More category theory: Jacobs (1999), Asperti and Longo (1991), Crole (1994)
+- _Proofs and Types_ by Girard, Lafont, and Taylor (1989)
+- _Computation and Deduction_ by Pfenning (2001)
+- _Type Theory and Functional Programming_ by Thompson (1991)
+- _Constructive Foundations for Functional Languages_ by Turner (1991)
+
 #pagebreak()
 
 #set heading(numbering: none)
