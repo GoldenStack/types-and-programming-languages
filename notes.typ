@@ -85,6 +85,20 @@ Note that the importance of a type system to any particular language is unrelate
 - Having dynamic (Python, etc.) versus static typing (C, etc.).
 - Having implicit (ML, etc.) versus explicit type annotations (Java, etc.).
 
+== Capsule History
+
+In the early to mid 1950s, type systems were first used to distinguish between integer types and floating-point types. In the late 1950s and early 1960s, this was extended to include basic structured data (such as arrays of records) and higher order functions. Later, in the 1970s, these were expanded into richer concepts like abstract data types, modules, subtypes, and parametric polymorphism. Around this time, computer scientists began to draw parallels between these type systems and more formal mathematical logic.
+
+The original textbook has an extended timeline. A few select choices #footnote("Many important advancements have been removed. This is a select choice based on personal views."):
+- 1900s: #link("https://en.wikipedia.org/wiki/Principia_Mathematica")[Formalization of mathematics]
+- 1930s: #link("https://en.wikipedia.org/wiki/Lambda_calculus")[Untyped lambda calculus]
+- 1960s: #link("https://en.wikipedia.org/wiki/Curry%E2%80%93Howard_correspondence")[Curry-Howard Correspondence]
+- 1970s: #link("https://en.wikipedia.org/wiki/Intuitionistic_type_theory")[Intuitionistic type theory], #link("https://en.wikipedia.org/wiki/ML_(programming_language)")[ML], and #link("https://en.wikipedia.org/wiki/Algebraic_data_type")[ADTs]
+- 1980s: #link("https://en.wikipedia.org/wiki/Linear_logic")[Linear logic], the #link("https://en.wikipedia.org/wiki/Calculus_of_constructions")[calculus of constructions], #link("https://en.wikipedia.org/wiki/Dependent_type")[dependent types], and #link("https://en.wikipedia.org/wiki/Effect_system")[effect systems].
+- 1990s: #link("https://en.wikipedia.org/wiki/Typed_assembly_language")[Typed assembly]
+
+The textbook was produced in 2002 and thus has nothing past the 1990s.
+
 #pagebreak()
 
 #set heading(numbering: none)
