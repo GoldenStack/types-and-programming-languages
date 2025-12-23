@@ -60,6 +60,13 @@ The conservativity of a type system can generally be reduced by allowing more sp
 - Completely defined by the manual (i.e. no undefined behaviour)
 // pointer provenance, stack thread-exclusivity
 
+// Around this point in the textbook, a table is provided, which provides values for every $(statically checked, dynamically checked) x (safe, unsafe)$. As follows:
+// Safe, statically checked: ML, Haskell, Java
+// Unsafe, staticaly checked: C, C++
+// Safe, dynamically checked: Lisp, Scheme, Perl
+// Unsafe, dynamically checked: none
+// It is noted that the last entry is empty. Imagine a language that fulfills this. In fact, there are many, but they are usually considered abstract machines. Nonetheless, it would be funny.
+
 *Efficiency*: Type checkers provide more compile-time guarantees, allowing for more optimizations, such as which instructions are used or which runtime checks can be omitted. #footnote[I do take issue with this statement. The point at which one has the most information about program functionality and tendencies is at runtime; thus, there is a higher performance ceiling when concerned with runtime checks (see #link("https://en.wikipedia.org/wiki/Itanium")[Itanium] as a prominent pro-runtime/pro-JIT example). Furthermore, a sufficiently intelligent compiler can hypothetically determine all information that a type-checker would be able to---it is simply much more difficult to write a compiler as such. In a way, efficiency _does_ apply here---just as compiler development efficiency instead of program runtime efficiency. I digress.]
 
 Other uses:
