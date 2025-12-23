@@ -77,6 +77,14 @@ Other uses:
 
 *Data storage*: Types are on a rise in database or data storage systems, with JSON schemas and `.xsd` files as just two examples. They help structure data, and have all the same benefits types do normally.
 
+== Type Systems and Language Design
+
+Type systems, like any other feature, should not be bolted on to an existing language. It is best when all features are designed hand-in-hand. This is exemplified for type systems specifically as they are often core features of a language, around which syntax, semantics, and functionality are defined.
+
+Note that the importance of a type system to any particular language is unrelated to the two separate problems of:
+- Having dynamic (Python, etc.) versus static typing (C, etc.).
+- Having implicit (ML, etc.) versus explicit type annotations (Java, etc.).
+
 #pagebreak()
 
 #set heading(numbering: none)
