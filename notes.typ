@@ -114,6 +114,31 @@ The textbook was produced in 2002 and thus has nothing past the 1990s.
 
 #pagebreak()
 
+= Mathematical Preliminaries
+
+Common notation and mathematical facts required for the textbook.
+
+== Sets, Relations, and Functions
+
+- We write exhaustive construction as ${a, b, c, ...}$, and the comprehension definition as ${x in S | ...}$.
+- The cardinality (size) of a set $S$ is $|S|$. Its power set (the set of subsets of $S$) is $P(S)$. $|P(S)| = 2^(|S|)$
+- The difference between two sets $S \\ T = {s in S | s in.not T}$.
+- Cartesian product between two sets $S times T = {s in S, t in T | (s, t)}$
+- The empty set (set of $0$ elements) is defined as $emptyset$. The set of natural numbers $NN = {0, 1, 2, ...}$
+- $n$-place _relation_ on $(S_1, S_2, ..., S_n)$ is a set $R subset.eq S_1 times S_2 times ... times S_n$. We say any tuple $s in R$ is _related_ by $R$.
+- When $n = 1$ (one-place relation), it is called a _predicate_ $P$ on $S$. We often represent $s in P$ as $P(s)$, i.e. $P(s) = s in P$.
+- When $n = 2$ (two-place relation), it is called a _binary relation over_ $S$ and $T$. We often represent $(s, t) in R$ as $s" "T" "r$. When $S = U$ and $T = U$ for some $U$, we say $R$ is a binary relation over $U$.
+- When $n >= 3$, mixfix syntax is often used for relations with a sequence of symbols that represents the relation, e.g. $Gamma tack s colon T$ for $(Gamma, s, T)$ is in the relation (explained later in the book).
+- The domain of a relation $R$ on sets $S$ and $T$ is $"dom"(R) = {s in S | exists t (s" "R" "t)}$.\ The codomain is $"range"(R) = {t in S | exists s (s " "R" "t)}$.
+- A relation $R$ over $S, T$ is called a _partial function_ from $S$ to $T$ if $ forall t_1, t_2 exists s in S ((s, t_1) in R and (s, t_2) in R -> t_1 = t_2) $
+Alternatively, the contrapostive, which has its own meaning: $ forall (t_1, t_2) in S^2 exists s in S (t_1 eq.not t_2 --> (s, t_1) in.not R or (s, t_2) in.not R) $
+- If $"dom"(R) = S$ for a partial function $R$, then $R$ is instead called a _total function_ (or just _function_).
+- A partial function $R$ is said to be _defined_ on an argument $s in S$ if $s in "dom"(R)$ (often noted as $R(s) arrow.b$), and undefined if $s in.not "dom"(R)$ (or $R(s) arrow.t$).
+- Note that "failure" is still defined, and is actually equivalent to being a function from $S$ to $T union {"fail"}$, where failure returns the $"fail"$ unit value. This is different from divergence, where there is no result at all (i.e. $f(x) arrow.t$).
+- A predicate $P$ is said to be _preserved_ by a binary relation $R$ if $forall s, s' ((s, s') in R and P(s) -> P(s'))$.
+
+#pagebreak()
+
 #set heading(numbering: none)
 
 = Select References
