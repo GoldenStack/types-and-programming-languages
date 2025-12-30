@@ -149,6 +149,14 @@ Alternatively, the contrapostive, which has its own meaning: $ forall (t_1, t_2)
 - *Exercise*. Given a constructive definition of $R^+$ as the union of every element in the recurrence relation as$ R^+ = union.big_i R_i " over " cases(R_0 = R, R_n = R_(n-1) union ((s, u) | exists t ((s, t) in R and (t, u) in R)), delim: #none, gap: #0.5em) $show that $R^+$ is really the transitive closure of $R$.\ Since the definition of transitivity indicates a relation is not transitive if $ exists (s, t, u in S) ((s, t) in R and (t, u) in R and (s, u) in.not R) $ it is clear that term $R_n$ will ensure all pairs that could indicate the non-transitivity of $R^(n-1)$ are added to $R_n$. As this process is done infinitely, if $R$ is considered a directed graph over $S$, any two nodes with an $n$-length path between them must have a $1$-length path between them by at latest $R_n$, fulfilling the transitivity of $R^+$. #footnote[It seems one could make a more accurate estimate of $ceil(log_2(n))$ steps, but I am unwilling to attempt to prove this at the current moment. Also, I am aware this is far from a proof; I simply explain enough to convince myself.]
 - Let $<=$ be a preorder over $S$. A _decreasing chain_ in $<=$ is a sequence $s_1, s_2, ..., s_n$ such that $forall i (s_(i_1) < s_i)$.\ In this case, $S$ is said to be _well-founded_ if there does not exist a decreasing chain of infinite length in $<=$, or sometimes simply that $S$ is well-founded (see the #link("https://en.wikipedia.org/wiki/Well-ordering_principle")[well-ordering_principle]).
 
+== Sequences
+
+- A _sequence_ is an ordered list of elements, separared by comments. Commas are used both as `cons` for adding a single element to either end of a sequence as well as `append` for concatenating sequences. For example, if $a = 1,2,3$ and $b = 4,5,6$, then $0,a = 0,1,2,3$; $a,0 = 1,2,3,0$; and $b,a = 4,5,6,1,2,3$. #footnote[This does also mean that, under these operators, you cannot construct sequences of sequences.]
+- The sequence of numbers from $1$ to $n$ is written as $1..n$.
+- The length of a sequence $a$ is $|a|$.
+- The empty sequence is either $circle.filled.small$ or blank. 
+- Two sequences are (mutually) _permutations_ of each other if they contain the same elements when discounting order.
+
 #pagebreak()
 
 #set heading(numbering: none)
