@@ -157,6 +157,22 @@ Alternatively, the contrapostive, which has its own meaning: $ forall (t_1, t_2)
 - The empty sequence is either $circle.filled.small$ or blank. 
 - Two sequences are (mutually) _permutations_ of each other if they contain the same elements when discounting order.
 
+== Induction
+
+*Weak induction* (also known as _ordinary induction_):
+- For a predicate $P subset.eq NN$, if $P(0)$ and $forall i (P(i) -> P(i+1))$, then $forall n (P(n))$.
+
+*Strong induction* (also known as _complete induction_):
+- For a predicate $P subset.eq NN$, if $forall i (forall j (j < i -> P(j)) -> P(i))$, then $forall n (P(n))$.
+
+_Lexicographic order_: order on pairs of natural numbers such that $ (m, n) <= (m', n') <--> ((m < m') or (m = m' and n <= n')) $
+
+*Lexicographic induction*:
+- For a predicate $P subset.eq NN^2$, if $forall (m, n, m', n') (((m', n') <= (m, n) -> P(m', n')) -> P(m, n))$, then $forall (m, n) P(m, n)$.
+- Lexicographic induction is the basis for _nested induction_ proofs.
+
+_Structural induction_ will be introduced in the future.
+
 #pagebreak()
 
 #set heading(numbering: none)
