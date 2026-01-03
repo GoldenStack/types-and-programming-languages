@@ -173,6 +173,12 @@ _Lexicographic order_: order on pairs of natural numbers such that $ (m, n) <= (
 
 _Structural induction_ will be introduced in the future.
 
+== Background Reading
+
+- Induction: Winskel (1993)
+- Ordered sets: Davey and Priestley (1990)
+- Basic set theory: Halmos (1987)
+
 #pagebreak()
 
 #set heading(numbering: none)
