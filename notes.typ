@@ -29,6 +29,17 @@
   text(fill: blue, weight: "medium", it),
 )
 
+// Shorthand for program results
+#let program(term, result) = context grid(
+  columns: (auto, auto),
+  inset: 1pt,
+  row-gutter: 0.8em,
+  column-gutter: 0.4em,
+  
+  [], term,
+  v(-0.25 * measure(sym.triangle.r.filled).height) + sym.triangle.r.filled, result,
+)
+
 = Introduction
 
 == Types in Computer Science
@@ -178,6 +189,62 @@ _Structural induction_ will be introduced in the future.
 - Induction: Winskel (1993)
 - Ordered sets: Davey and Priestley (1990)
 - Basic set theory: Halmos (1987)
+
+#pagebreak()
+
+= Untyped Arithmetic Expressions
+
+We start with basic program semantics which we can be more clear about. We consider a simple language over numbers and booleans, which is basic but necessary before addressing other fundamental concepts.
+
+== Introduction
+
+We consider a few basic operations: booleans, conditionals, $0$, predecessor/successor, and `iszero`.
+
+// This almost worked well, but it was just a little too janky.
+// $t ::= & && "terms:" \
+// & #`true` && "constant true" \
+// & #`false` && "constant false" \
+// & #`if t then t else t` && "conditional" \
+// & #`0` && "constant zero" \
+// & #`succ t` && "successor" \
+// & #`pred t` && "predecessor" \
+// & #`iszero t` && "zero test" \
+// & #h(15em) && $
+
+#box(width: 50%, grid(
+  columns: (auto, 1fr, auto),
+  align: (left + horizon, left + horizon, right + horizon),
+  gutter: 0.5em,
+  $t ::= $, $$, emph[terms:],
+  $$, `true`, emph[constant true],
+  $$, `false`, emph[constant false],
+  $$, `if t then t else t`, emph[conditional],
+  $$, `0`, emph[constant zero],
+  $$, `succ t`, emph[successor],
+  $$, `pred t`, emph[predecessor],
+  $$, `iszero t`, emph[zero test],
+))
+
+This resembles BNF from Aho, Sethi, and Ullman (1986). This syntax declares a set of _terms_, with $t$ ranging over terms (any $t$ in the grammar indicates that any term may be substituted in its place), and each line declaring a _form_ of valid term. The terms on the right are comments.
+
+$t$,#footnote[$t$, nearby letters like $s$, $u$, $r$, and variants such as $t_1$ and $s'$ are also used as terms of the relevant object language.] here, is a _metavariable_--a "variable" as it is a placeholder for a term, and "meta" because it is a variable in the _metalanguage_ that is being used to describe the present _object language_. #footnote[Also, the term _metatheory_ refers to the collection of true statements about some logical system, so "metatheory of subtyping" refers to "the formal study of the properties of systems with subtyping".]
+
+A _term_ is an expression representing some sort of computation, while an _expression_ is a general phrase, such as a term, type, or kind expression.
+
+A _program_ is a term built from the forms given by a grammar. Notably, they all must be based around `true`, `false`, or `0`, as those are the only forms that do not depend on other terms. #footnote[Disregarding infinitely recursive terms.]
+
+An example program:
+
+#program(`if false then 0 else 1`, `1`)
+
+#program(`iszero (pred (succ 0))`, `true`)
+
+A few notes: 
+- The #sym.triangle.r.filled symbol is used to display the results of expressions, although it is omitted for trivial ones.
+- Parentheses are used here for readability, although they are not in the grammar and do not matter for this language due to its unambiguous syntax.
+- We use standard arabic numerals for numbers, represented with Peano arithmetic as nested applications of `succ` to `0`.
+- Results are always booleans or numbers. These are called _values_. This means values, in this grammar, cannot include forms `if t then t else t`, `pred t`, and `iszero t`.
+- Some permitted terms are nonsensical, like `succ true`. Disallowing terms suhc as these is the point of a type system.
 
 #pagebreak()
 
