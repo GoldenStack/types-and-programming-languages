@@ -244,7 +244,7 @@ A few notes:
 - Parentheses are used here for readability, although they are not in the grammar and do not matter for this language due to its unambiguous syntax.
 - We use standard arabic numerals for numbers, represented with Peano arithmetic as nested applications of `succ` to `0`.
 - Results are always booleans or numbers. These are called _values_. This means values, in this grammar, cannot include forms `if t then t else t`, `pred t`, and `iszero t`.
-- Some permitted terms are nonsensical, like `succ true`. Disallowing terms suhc as these is the point of a type system.
+- Some permitted terms are nonsensical, like `succ true`. Disallowing terms such as these is the point of a type system.
 
 #pagebreak()
 
