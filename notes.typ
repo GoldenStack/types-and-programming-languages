@@ -322,6 +322,44 @@ Each set $S_i$, then, essentially contains the iterations equal to $ZZ\/i ZZ$, w
 
 The paper proceeds with a proof that $T = S$, which is not necessary here.
 
+== Induction on Terms
+
+For any $t in T$, $t$ must either:
+- Be a constant: $t in {"true", "false", 0}$
+- Have the form $"succ" t_1$, $"pred" t_1$, or $"iszero" t_1$ for some _smaller_ term $t_1$
+- Have the form $"if" t_1 "then" t_2 "else" t_3$ for smaller terms $t_1, t_2, t_3$.
+This can be used to give _inductive definitions_ of functions over a set of terms, and to give _inductive proofs_ over terms. For example, we define the number of nodes in the abstract syntax tree of a term $t$:
+
+$ "size"("true") &&=& 1 \
+"size"("false") &&=& 1 \
+"size"(0) &&=& 1 \
+"size"("succ" t_1) &&=& "size"(t_1) + 1 \
+"size"("pred" t_1) &&=& "size"(t_1) + 1 \
+"size"("iszero" t_1) &&=& "size"(t_1) + 1 \
+"size"("if" t_1 "then" t_2 "else" t_3) &&=& "size"(t_1) + "size"(t_2) + "size"(t_3) + 1 $
+
+Taking `depth` to mean the depth of a term as a tree, we define some principles of induction on terms, supposing that $P : T -> "boolean"$:
+
+_Over size_: $forall s (forall r ("size"(r) < "size"(s) and P(r)) -> P(s)) -> P(s)$
+
+_Over depth_: $forall s (forall r ("depth"(r) < "depth"(s) and P(r)) -> P(s)) -> P(s)$
+
+_Structural induction_: $forall s (forall r (r "is an immediate subterm of" s and P(r)) -> P(s)) -> P(s)$
+
+Notice that these examples, converted from the textbook, are partially strong induction (the first two examples) and partially weak induction (the last example).
+
+*Exercise.* Prove the examples above. For brevity, only the last example will be proven.
+
+We take $R(s)$ to equal the set of immediate subterms of $s$.
+
+_Proof:_ We aim to prove that, for any, $P : T -> "boolean"$, structural induction holds for $P$ over $T$ such that, if $forall s (forall r in R(s) (P(r))) -> P(s)$, then $P$ holds for all $s$.
+
+We first note that for terminal terms, there exist no subterms, so $forall (r in "subterms of s") P(r) = forall emptyset P(r) $, which is true.
+
+For the inductive step--We make the inductive assumption that $forall r in R (P(r))$. Per modus ponens, we can use the assumption $forall s (forall r in R(s) (P(r))) -> P(s)$ to prove that $P(s)$. Thus, the given $P(s)$ has been proven. Note that this is analogous to using $k-1$ to prove $k$ instead of using $k$ to prove $k+1$, as it was more convenient for this proof. 
+
+
+
 #pagebreak()
 
 #set heading(numbering: none)
