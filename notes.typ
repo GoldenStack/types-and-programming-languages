@@ -358,7 +358,17 @@ We first note that for terminal terms, there exist no subterms, so $forall (r in
 
 For the inductive step--We make the inductive assumption that $forall r in R (P(r))$. Per modus ponens, we can use the assumption $forall s (forall r in R(s) (P(r))) -> P(s)$ to prove that $P(s)$. Thus, the given $P(s)$ has been proven. Note that this is analogous to using $k-1$ to prove $k$ instead of using $k$ to prove $k+1$, as it was more convenient for this proof. 
 
+== Semantic Styles
 
+There are three main approaches to formalizing language semantics.
+
+1. _Operational semantics_: behaviour is defined with an _abstract machine_ formed from a _state_ (which can be as simple as a term), defined with a _transition function_. The _meaning_ of a term `t` is the final state the machine reaches when initialized with `t`. Providing multiple abstract machines is often useful for useful as a means of proving that language semantics are correct.
+
+2. _Denotational semantics_: behaviour is abstracted from sequences of machine states to a more general idea of mathematical objects. Terms are mapped with an _interpretation function_ into an element belonging to one of several _semantics domains_, known as _domain theory_. This omits the details of evaluation and makes it easier to reason about programs, such as through defining laws or identifying impossible behaviour.
+
+3. _Axiomatic semantics_: the axiomatic laws themselves are the definition of the language instead of defining program behaviour and deriving laws from that.
+
+Mathematically weak operational semantics were regarded as inferior  to the other two, but proved more viable in the face of nondeterminism and concurrency (for denotational semantics), and procedures (for axiomatic semantics).
 
 #pagebreak()
 
