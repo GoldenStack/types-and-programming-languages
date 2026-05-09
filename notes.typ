@@ -1,4 +1,5 @@
 #import "@preview/problemst:0.1.2": pset
+#import "@preview/curryst:0.6.0": rule, prooftree, rule-set
 
 #show: pset.with(
   class: "Types and Programming Languages",
@@ -245,6 +246,81 @@ A few notes:
 - We use standard arabic numerals for numbers, represented with Peano arithmetic as nested applications of `succ` to `0`.
 - Results are always booleans or numbers. These are called _values_. This means values, in this grammar, cannot include forms `if t then t else t`, `pred t`, and `iszero t`.
 - Some permitted terms are nonsensical, like `succ true`. Disallowing terms such as these is the point of a type system.
+
+== Syntax
+
+The grammar in the previous section is a compact notation for the following inductive definition:
+
+*Definition*: The set of _terms_ is the smallest set $T$ such that
++ ${#`true`, #`false`, #`0`} subset.eq T$
++ $t_1 in S -> {#`succ` t_1, #`pred` t_1, #`iszero` t_1} subset.eq T$
++ ${t_1, t_2, t_3} subset.eq T -> #`if` t_1 #`then` t_2 #`else` t_3 in T$.
+
+This indicates a set of base terms, defines rules for constructing new terms, and indicates that only terms in this definition are in $T$ (via "smallest"). Once again, this does not specify anything about parentheses; it defines a tree, not a set of strings. Parentheses are uses simply for clarifying or overriding precedence when converting expressions to strings.
+
+It is also possible to define terms with inference rules:
+
+#table(
+  columns: (auto, auto, auto),
+  stroke: none,
+  align: center,
+  [`true` $in T$],
+  [`false` $in T$],
+  [`0` $in T$],
+  prooftree(rule(
+    [$t_1 in T$],
+    [`succ` $T_1 in T$],
+  )),
+  prooftree(rule(
+    [$t_1 in T$],
+    [`pred` $T_1 in T$],
+  )),
+  prooftree(rule(
+    [$t_1 in T$],
+    [`iszero` $T_1 in T$],
+  )),
+  table.cell(colspan: 3, prooftree(rule(
+    [$t_1 in T$],
+    [$t_2 in T$],
+    [$t_3 in T$],
+    [`if` $t_1$ `then` $t_2$ `else` $t_3$ in T]
+  )))
+)
+
+This is a similar procedure for _generating_ the elements of $T$; we start with known elements, and then introduce further production rules.
+
+Premises are placed above line, with the conclusions that can be drawn from each premise included below the line. Rules with no premises (the top row) are called _axioms_. An _inference rule_ refers to both axioms and _proper rules_. Inference rules are, in reality, _rule schemas_, since they can be instantiated on any valid _metavariables_ to obtain a _concrete rule_ that can be applied in a real case.
+
+We can also define these inductively:
+
+$
+S_0 &= emptyset\
+S_(i+1) &= && && {"true", "false", 0} \
+& && union && {"succ" t_1, "pred" t_1, "iszero" t_1 | t_1 in S_i} \
+& && union && {"if" t_1 "then" t_2 "else" t_3 | t_1, t_2, t_3 in S_i} $
+$ S = union.big_i S_1 $
+
+Essentially, we define iterations of rule applications, and collect them all into $S$.
+
+*Exercise.* How many elements does $S_3$ have?
+
+This represents a recurrence relation of:
+
+$r_0 = 0$
+
+$r_(n+1) = 3 + 3 r_n + (r_n)^3$
+
+We sample up to $r_3$:
+
+$r_0 = 0, r_1 = 3, r_2 = 39, r_3 = 59439$
+
+*Exercise.* Show that the sets $S_i$ are _cumulative_---that is, $forall i (S_i subset.eq S_(i+1))$.
+
+Instead of a proof, we provide the explanation that the definition for the next $S_(i+1)$, the iteration operation applies one more layer of indirection from the base value set, also adding the aforementioned set. Thus, it turns ${0}$ into ${0+1} union {0} = {0, 1}$, ${0, 1}$ into ${0+1, 1+1} union {0} = {0, 1, 2}$, et cetera.
+
+Each set $S_i$, then, essentially contains the iterations equal to $ZZ\/i ZZ$, which is a subset of $ZZ\/(i+1)Z$. It's possible to explain this in a much more sound manner, but that's too much work for this question.
+
+The paper proceeds with a proof that $T = S$, which is not necessary here.
 
 #pagebreak()
 
