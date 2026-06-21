@@ -253,7 +253,7 @@ The grammar in the previous section is a compact notation for the following indu
 
 *Definition*: The set of _terms_ is the smallest set $T$ such that
 + ${#`true`, #`false`, #`0`} subset.eq T$
-+ $t_1 in S -> {#`succ` t_1, #`pred` t_1, #`iszero` t_1} subset.eq T$
++ $t_1 in T -> {#`succ` t_1, #`pred` t_1, #`iszero` t_1} subset.eq T$
 + ${t_1, t_2, t_3} subset.eq T -> #`if` t_1 #`then` t_2 #`else` t_3 in T$.
 
 This indicates a set of base terms, defines rules for constructing new terms, and indicates that only terms in this definition are in $T$ (via "smallest"). Once again, this does not specify anything about parentheses; it defines a tree, not a set of strings. Parentheses are uses simply for clarifying or overriding precedence when converting expressions to strings.
