@@ -133,13 +133,13 @@ Common notation and mathematical facts required for the textbook.
 == Sets, Relations, and Functions
 
 - We write exhaustive construction as ${a, b, c, ...}$, and the comprehension definition as ${x in S | ...}$.
-- The cardinality (size) of a set $S$ is $|S|$. Its power set (the set of subsets of $S$) is $P(S)$. $|P(S)| = 2^(|S|)$
-- The difference between two sets $S \\ T = {s in S | s in.not T}$.
-- Cartesian product between two sets $S times T = {s in S, t in T | (s, t)}$
+- The cardinality (size) of a set $S$ is $|S|$. Its power set (the set of subsets of $S$) is $cal(P)(S)$. $|cal(P)(S)| = 2^(|S|)$
+- The difference between two sets $S \\ cal(T) = {s in S | s in.not cal(T)}$.
+- Cartesian product between two sets $S times cal(T) = {s in S, t in cal(T) | (s, t)}$
 - The empty set (set of $0$ elements) is defined as $emptyset$. The set of natural numbers $NN = {0, 1, 2, ...}$
 - $n$-place _relation_ on $(S_1, S_2, ..., S_n)$ is a set $R subset.eq S_1 times S_2 times ... times S_n$. We say any tuple $s in R$ is _related_ by $R$.
 - When $n = 1$ (one-place relation), it is called a _predicate_ $P$ on $S$. We often represent $s in P$ as $P(s)$, i.e. $P(s) = s in P$.
-- When $n = 2$ (two-place relation), it is called a _binary relation over_ $S$ and $T$. We often represent $(s, t) in R$ as $s" "T" "r$. When $S = U$ and $T = U$ for some $U$, we say $R$ is a binary relation over $U$.
+- When $n = 2$ (two-place relation), it is called a _binary relation over_ $S$ and $cal(T)$. We often represent $(s, t) in R$ as $s" "cal(T)" "r$. When $S = cal(U)$ and $cal(T) = cal(U)$ for some $cal(U)$, we say $R$ is a binary relation over $cal(U)$.
 - When $n >= 3$, mixfix syntax is often used for relations with a sequence of symbols that represents the relation, e.g. $Gamma tack s colon T$ for $(Gamma, s, T)$ is in the relation (explained later in the book).
 - The domain of a relation $R$ on sets $S$ and $T$ is $"dom"(R) = {s in S | exists t (s" "R" "t)}$.\ The codomain is $"range"(R) = {t in S | exists s (s " "R" "t)}$.
 - A relation $R$ over $S, T$ is called a _partial function_ from $S$ to $T$ if $ forall t_1, t_2 exists s in S ((s, t_1) in R and (s, t_2) in R -> t_1 = t_2) $
@@ -251,12 +251,12 @@ A few notes:
 
 The grammar in the previous section is a compact notation for the following inductive definition:
 
-*Definition*: The set of _terms_ is the smallest set $T$ such that
-+ ${#`true`, #`false`, #`0`} subset.eq T$
-+ $t_1 in T -> {#`succ` t_1, #`pred` t_1, #`iszero` t_1} subset.eq T$
-+ ${t_1, t_2, t_3} subset.eq T -> #`if` t_1 #`then` t_2 #`else` t_3 in T$.
+*Definition*: The set of _terms_ is the smallest set $cal(T)$ such that
++ ${#`true`, #`false`, #`0`} subset.eq cal(T)$
++ $t_1 in cal(T) -> {#`succ` t_1, #`pred` t_1, #`iszero` t_1} subset.eq cal(T)$
++ ${t_1, t_2, t_3} subset.eq cal(T) -> #`if` t_1 #`then` t_2 #`else` t_3 in cal(T)$.
 
-This indicates a set of base terms, defines rules for constructing new terms, and indicates that only terms in this definition are in $T$ (via "smallest"). Once again, this does not specify anything about parentheses; it defines a tree, not a set of strings. Parentheses are uses simply for clarifying or overriding precedence when converting expressions to strings.
+This indicates a set of base terms, defines rules for constructing new terms, and indicates that only terms in this definition are in $cal(T)$ (via "smallest"). Once again, this does not specify anything about parentheses; it defines a tree, not a set of strings. Parentheses are uses simply for clarifying or overriding precedence when converting expressions to strings.
 
 It is also possible to define terms with inference rules:
 
@@ -264,30 +264,30 @@ It is also possible to define terms with inference rules:
   columns: (auto, auto, auto),
   stroke: none,
   align: center,
-  [`true` $in T$],
-  [`false` $in T$],
-  [`0` $in T$],
+  [`true` $in cal(T)$],
+  [`false` $in cal(T)$],
+  [`0` $in cal(T)$],
   prooftree(rule(
-    [$t_1 in T$],
-    [`succ` $T_1 in T$],
+    [$t_1 in cal(T)$],
+    [`succ` $cal(T)_1 in cal(T)$],
   )),
   prooftree(rule(
-    [$t_1 in T$],
-    [`pred` $T_1 in T$],
+    [$t_1 in cal(T)$],
+    [`pred` $cal(T)_1 in cal(T)$],
   )),
   prooftree(rule(
-    [$t_1 in T$],
-    [`iszero` $T_1 in T$],
+    [$t_1 in cal(T)$],
+    [`iszero` $cal(T)_1 in cal(T)$],
   )),
   table.cell(colspan: 3, prooftree(rule(
-    [$t_1 in T$],
-    [$t_2 in T$],
-    [$t_3 in T$],
-    [`if` $t_1$ `then` $t_2$ `else` $t_3$ in T]
+    [$t_1 in cal(T)$],
+    [$t_2 in cal(T)$],
+    [$t_3 in cal(T)$],
+    [`if` $t_1$ `then` $t_2$ `else` $t_3$ in cal(T)]
   )))
 )
 
-This is a similar procedure for _generating_ the elements of $T$; we start with known elements, and then introduce further production rules.
+This is a similar procedure for _generating_ the elements of $cal(T)$; we start with known elements, and then introduce further production rules.
 
 Premises are placed above line, with the conclusions that can be drawn from each premise included below the line. Rules with no premises (the top row) are called _axioms_. An _inference rule_ refers to both axioms and _proper rules_. Inference rules are, in reality, _rule schemas_, since they can be instantiated on any valid _metavariables_ to obtain a _concrete rule_ that can be applied in a real case.
 
@@ -324,7 +324,7 @@ The paper proceeds with a proof that $T = S$, which is not necessary here.
 
 == Induction on Terms
 
-For any $t in T$, $t$ must either:
+For any $t in cal(T)$, $t$ must either:
 - Be a constant: $t in {"true", "false", 0}$
 - Have the form $"succ" t_1$, $"pred" t_1$, or $"iszero" t_1$ for some _smaller_ term $t_1$
 - Have the form $"if" t_1 "then" t_2 "else" t_3$ for smaller terms $t_1, t_2, t_3$.
@@ -338,7 +338,7 @@ $ "size"("true") &&=& 1 \
 "size"("iszero" t_1) &&=& "size"(t_1) + 1 \
 "size"("if" t_1 "then" t_2 "else" t_3) &&=& "size"(t_1) + "size"(t_2) + "size"(t_3) + 1 $
 
-Taking `depth` to mean the depth of a term as a tree, we define some principles of induction on terms, supposing that $P : T -> "boolean"$:
+Taking `depth` to mean the depth of a term as a tree, we define some principles of induction on terms, supposing that $P : cal(T) -> "boolean"$:
 
 _Over size_: $forall s (forall r ("size"(r) < "size"(s) and P(r)) -> P(s)) -> P(s)$
 
@@ -352,7 +352,7 @@ Notice that these examples, converted from the textbook, are partially strong in
 
 We take $R(s)$ to equal the set of immediate subterms of $s$.
 
-_Proof:_ We aim to prove that, for any, $P : T -> "boolean"$, structural induction holds for $P$ over $T$ such that, if $forall s (forall r in R(s) (P(r))) -> P(s)$, then $P$ holds for all $s$.
+_Proof:_ We aim to prove that, for any, $P : cal(T) -> "boolean"$, structural induction holds for $P$ over $cal(T)$ such that, if $forall s (forall r in R(s) (P(r))) -> P(s)$, then $P$ holds for all $s$.
 
 We first note that for terminal terms, there exist no subterms, so $forall (r in "subterms of s") P(r) = forall emptyset P(r) $, which is true.
 
