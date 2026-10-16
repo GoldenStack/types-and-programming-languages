@@ -1,5 +1,6 @@
 #import "@preview/problemst:0.1.2": pset
 #import "@preview/curryst:0.6.0": rule, prooftree, rule-set
+#import "tapl.typ"
 
 #show: pset.with(
   class: "Types and Programming Languages",
@@ -12,34 +13,7 @@
 
 #pagebreak()
 
-// Custom heading
-#set heading(numbering: "1.1.")
-
-// Justify all "normal" text
-#set par(justify: true)
-#show align.where(alignment: center + top): set par(justify: false)
-
-// Code formatting (currently just font)
-#show raw: set text(font: "Cascadia Code")
-// #show raw.where(block: false): set text(size: 1.1em)
-
-// Make links fancy
-#show link: it => underline(
-  offset: 2pt,
-  stroke: 1pt,
-  text(fill: blue, weight: "medium", it),
-)
-
-// Shorthand for program results
-#let program(term, result) = context grid(
-  columns: (auto, auto),
-  inset: 1pt,
-  row-gutter: 0.8em,
-  column-gutter: 0.4em,
-  
-  [], term,
-  v(-0.25 * measure(sym.triangle.r.filled).height) + sym.triangle.r.filled, result,
-)
+#show: tapl.apply-formatting
 
 = Introduction
 
@@ -236,9 +210,9 @@ A _program_ is a term built from the forms given by a grammar. Notably, they all
 
 An example program:
 
-#program(`if false then 0 else 1`, `1`)
+#tapl.program(`if false then 0 else 1`, `1`)
 
-#program(`iszero (pred (succ 0))`, `true`)
+#tapl.program(`iszero (pred (succ 0))`, `true`)
 
 A few notes: 
 - The #sym.triangle.r.filled symbol is used to display the results of expressions, although it is omitted for trivial ones.
@@ -369,6 +343,64 @@ There are three main approaches to formalizing language semantics.
 3. _Axiomatic semantics_: the axiomatic laws themselves are the definition of the language instead of defining program behaviour and deriving laws from that.
 
 Mathematically weak operational semantics were regarded as inferior  to the other two, but proved more viable in the face of nondeterminism and concurrency (for denotational semantics), and procedures (for axiomatic semantics).
+
+== Evaluation
+
+Let us now define the operational semantics of booleans.
+
+#tapl.semantics(
+  top-left: [#tapl.brick($BB$) _(untyped)_],
+  step-name: [$t -> t'$],
+  tapl.syntax(
+    name: "t",
+    desc: [terms:],
+    rules: (
+      "true": [constant true],
+      "false": [constant false],
+      "if t then t else t": [conditional],
+    ),
+  ),
+  tapl.syntax(
+    name: "v",
+    desc: [values:],
+    rules: (
+      "true": [true value],
+      "false": [false value],
+    ),
+  ),
+  tapl.evaluation(
+        [if true then $t_2$ else $t_3 -> t_2$],
+        [E-IfTrue]
+  ),
+  tapl.evaluation(
+        [if false then $t_2$ else $t_3 -> t_2$],
+        [E-IfFalse]
+  ),
+  tapl.evaluation(
+        prooftree(rule(
+          [$t_1 -> t'_1$],
+          [if $t_1$ then $t_2$ else $t_3$\ $->$ if $t'_1$ then $t_2$ else $t_3$],
+        )),
+        [E-If]
+  )
+)
+
+The column on the left represents the grammar defining two sets of expressions. $t$ represents the possible terms, and $v$ represents the values that can be emitted as a result of evaluation. $v$ is used in the future to refer to the possible values.
+
+The column on the right defines the _evaluation relation_ on terms; $t$ evaluates to $t'$ in one step. Each rule in order:
+- The first rule says that an `if true` can be literally evaluated to the `then` portion.
+- The second rule says that an `if false` can be literally evaluated to the `then` portion.
+- The third rule says that, if the guard $t$ evaluates to $t'$, then the whole conditional evaluats to `if` $t'_1$ `then` $t_2$ `else` $t_3$. In essence, if the result of fully evaluating $t_1$ is $t'_1$, then we can evalute this expression by evaluating `if` $t'_1$ `then` $t_2$ `else` $t_3$.
+
+This means that `true` and `false` can't be evaluated, and that in a statement such as
+#align(center)[`if true then (if false then false else false) else false`]
+must have the outer `if` evaluated first; it cannot reach `if true then false else true` at any point. Referred to as an _evaluation strategy_, this corresponds with the common evaluation order of programming languages. The first two rules do the real work of evaluation ("_computation rules_") while the last rule simply "determines where work is to be done" (a "_congruence rule_").
+
+*Definition.* An _instance_ of an inference rule is where you reify each metavariable to an actual value, creating a concrete rule as explained prior.
+
+*Definition*. A rule is _satisfied_ by a relation if every instance of the rule has either a conclusion 
+
+// page 36
 
 #pagebreak()
 
